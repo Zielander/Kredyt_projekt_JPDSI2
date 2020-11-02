@@ -11,47 +11,38 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 /*@SessionScoped*/
 public class KredytBB {
-	private String kwota = "10000.00";
-	private String lat = "1";
-	private String ile_proc = "5";
-	//private String rata;
+	private Double kwota;
+	private Double lat;
+	private Double ile_proc;
 	private Double result;
 
 	@Inject
-	FacesContext ctx; //Dependency Injection w skrócie DI
+	FacesContext ctx; //Dependency Injection w skrÃ³cie DI
 
-	public String getKwota() {
+	public Double getKwota() {
 		return kwota;
 	}
 
-	public void setKwota(String kwota) {
+	public void setKwota(Double kwota) {
 		this.kwota = kwota;
 	}
 
-	public String getLat() {
+	public Double getLat() {
 		return lat;
 	}
 
-	public void setLat(String lat) {
+	public void setLat(Double lat) {
 		this.lat = lat;
 	}
 
-	public String getIle_proc() {
+	public Double getIle_proc() {
 		return ile_proc;
 	}
 
-	public void setIle_proc(String ile_proc) {
+	public void setIle_proc(Double ile_proc) {
 		this.ile_proc = ile_proc;
 	}
 
-/*	public String getRata() {
-		return rata;
-	}
-
-	public void setRata(String rata) {
-		this.rata = rata;
-	}
-*/
 	public Double getResult() {
 		return result;
 	}
@@ -62,10 +53,6 @@ public class KredytBB {
 
 	public boolean doTheMath() {
 		try {
-			double kwota = Double.parseDouble(this.kwota);
-			double lat = Double.parseDouble(this.lat);
-			double ile_proc =  Double.parseDouble(this.ile_proc);
-			
 			result = (kwota * Math.pow(1+ile_proc/1200 , lat*12) * ( (1+(ile_proc / 1200)-1) / (Math.pow(1+ile_proc/1200 , lat*12) - 1)));
 			result *= 100;
 			result = (double) Math.round(result);
@@ -75,7 +62,7 @@ public class KredytBB {
 			return true;
 		} catch (Exception e) {
 			ctx.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "B³¹d podczas przetwarzania parametrów", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "BÅ‚Ä…d podczas przetwarzania parametrÃ³w", null));
 			return false;
 		}
 	}
@@ -89,3 +76,4 @@ public class KredytBB {
 	}
 
 }
+
