@@ -1,65 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title>Kredyt</title>
-</h:head>
-<h:body>
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-	<p:panel header="Kalkulator kredytowy z ratą miesięczną" style="margin: 1em auto" toggleable="true" closable="true" toggleSpeed="1000">	
+<ui:composition template="/templates/page-template.xhtml">
 
-	<h:form id="bla">
-	<h:messages styleClass="error"/>
-		<h:panelGrid id="grid" columns="3" cellpadding = "5">
-			<p:outputLabel for="kwota" 
-			value="Kwota do spłaty w zł:"  />
-  			<p:inputNumber id="kwota" 
-  			value="#{kredytBB.kwota}" 
-  			symbol=" zł" 
-  			symbolPosition="s" 
-  			decimalSeparator="," 
-  			required="true" 
-  			requiredMessage="Nie wpisano kwoty na jaką pobrano kredyt."
-  			converterMessage="Wpisana wartość musi być liczbą."
-  			validatorMessage="Wpisana wartość musi wynosić conajmniej 1000 zł" >
-  			<f:validateDoubleRange minimum="1000.00"/> </p:inputNumber>
-  			<p:message for="kwota" />
+	<ui:define name="pageContent">
 
-			<p:outputLabel for="lat" 
-			value="Długość kredytu w latach:"  />
-  			<p:inputText id="lat" 
-  			value="#{kredytBB.lat}" 
-  			required="true" 
-  			requiredMessage="Nie wpisano na jak długo pobrano kredyt."
-  			converterMessage="Wpisana wartość musi być liczbą."
-  			validatorMessage="Minimalna długość spłacania kredytu to 2 lata.">
-  			<f:validateDoubleRange minimum="2.00"/> </p:inputText>
-			<p:message for="lat" />
+		<p:panel header="Kalkulator kredytowy z ratą miesięczną" style="margin: 1em auto" toggleable="true" closable="true" toggleSpeed="1000">	
+
+			<p:messages id="msg"/>
 			
-			<p:outputLabel for="ile_proc" 
-			value="Oprocentowanie:"  />
-  			<p:inputNumber id="ile_proc" 
-  			value="#{kredytBB.ile_proc}" 
-  			symbol="%" 
-  			symbolPosition="s" 
-  			required="true" 
-  			requiredMessage="Nie wpisano wysokości oprocentowania kredytu."
-  			converterMessage="Wpisana wartość musi być liczbą."
-  			validatorMessage="Minimalna procentowa wartość raty to 5%.">
-  			<f:validateDoubleRange minimum="5.00"/> </p:inputNumber>
-  			<p:message for="ile_proc" />
+			<h:form>
+				<h:panelGrid id="grid" columns="3" cellpadding = "5">
+					<p:outputLabel for="kwota" 
+					value="Kwota do spłaty w zł:"  />
+  					<p:inputNumber id="kwota" 
+  					value="#{kredytBB.kwota}" 
+  					symbol=" zł" 
+  					symbolPosition="s" 
+  					decimalSeparator="," 
+  					required="true" 
+  					requiredMessage="Nie wpisano kwoty na jaką pobrano kredyt."
+  					converterMessage="Wpisana wartość musi być liczbą."
+  					validatorMessage="Wpisana wartość musi wynosić conajmniej 1000 zł" >
+  					<f:validateDoubleRange minimum="1000.00"/> </p:inputNumber>
+  					<p:message for="kwota" />
 
-		</h:panelGrid>		
+					<p:outputLabel for="lat" 
+					value="Długość kredytu w latach:"  />
+  					<p:inputText id="lat" 
+  					value="#{kredytBB.lat}" 
+  					required="true" 
+  					requiredMessage="Nie wpisano na jak długo pobrano kredyt."
+  					converterMessage="Wpisana wartość musi być liczbą."
+  					validatorMessage="Minimalna długość spłacania kredytu to 2 lata.">
+  					<f:validateDoubleRange minimum="2.00"/> </p:inputText>
+					<p:message for="lat" />
+			
+					<p:outputLabel for="ile_proc" 
+					value="Oprocentowanie:"  />
+  					<p:inputNumber id="ile_proc" 
+  					value="#{kredytBB.ile_proc}" 
+  					symbol="%" 
+  					symbolPosition="s" 
+  					required="true" 
+  					requiredMessage="Nie wpisano wysokości oprocentowania kredytu."
+  					converterMessage="Wpisana wartość musi być liczbą."
+  					validatorMessage="Minimalna procentowa wartość raty to 5%.">
+  					<f:validateDoubleRange minimum="5.00"/> </p:inputNumber>
+  						<p:message for="ile_proc" />
 
-			<p:messages id="msg" />
-			<p:commandButton value="Oblicz ratę" action="#{kredytBB.calc()}" update="@form"/>
-	</h:form>
+				</h:panelGrid>		
+				<p:commandButton value="Oblicz ratę" action="#{kredytBB.calc()}" update="@form"/>
+			</h:form>
 	
-	</p:panel>
+		</p:panel>
+	
+	</ui:define>
 
-</h:body>
+</ui:composition>
 </html>
