@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+
+		<p:panel header="Biblioteka" style="margin: 1em auto" toggleable="true" closable="true" toggleSpeed="1000">	
+
+			<p:messages id="msg"/>
+			
+			<h:form>
+				<h:panelGrid id="grid" columns="2" cellpadding = "5">
+					<p:outputLabel for="login" 
+					value="Login:"  />
+  					<p:inputText id="login" 
+  					value="#{loginBB.Użytkownik.login}" 
+  					required="true" 
+  					requiredMessage="Nie podano loginu."
+  					validatorMessage="Wpisany login był zbyt długi. (limit 45 znaków)" >
+  					<f:validateTextRange maximum="45"/> </p:inputText>
+  					<p:message for="login" />
+
+					<p:outputLabel for="hasło" 
+					value="Długość kredytu w latach:"  />
+  					<p:inputText id="lat" 
+  					value="#{loginBB.Użytkownik.hasło}" 
+  					required="true" 
+  					requiredMessage="Nie podano hasła."
+  					validatorMessage="Wpisane hasło było zbyt długie (limit 45 znaków).">
+  					<f:validateTextRange maximum="45"/> </p:inputText>
+					<p:message for="hasło" />
+					
+				</h:panelGrid>
+				
+				<p:commandButton value="Wyślij dane!" action="#{loginBB.checkData()}"/>
+			
+			</h:form>
+		</p:panel>
+	
+	</ui:define>
+
+</ui:composition>
+</html>
+			
